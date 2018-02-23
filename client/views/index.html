@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Node balance</title>
+    <script src='/assets/js/jquery.min.js'></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+</head>
+<body>
+    {% if error %}
+        <div class="container">
+            <h3 class="error"> {{ error }} </h3>
+            <form class="register" method="post" style="display: none;">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="username1">Username:</label>
+                    <input type="text" class="form-control" id="Username1" placeholder="Enter username" name="username">
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="pwd1">Password:</label>
+                    <input type="password" class="form-control" id="pwd1" placeholder="Enter password" name="password">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+                <p class="message">Already registered? <a href="#">Sign In</a></p>
+            </form>
+
+            <form class="login" method="post">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="username2">Username:</label>
+                    <input type="text" class="form-control" id="username2" placeholder="username" name="username">
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="pwd2">Password:</label>
+                    <input type="password" class="form-control" id="pwd2" placeholder="Enter password" name="password">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+                <p class="message">Not registered? <a href="#">Create an account</a></p>
+            </form>
+        </div>
+        <script src="/assets/js/unauth.js"></script>
+    {% else %}
+        <nav class="navbar navbar-inverse navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Hi, {{ username }}</a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" class="logout-btn"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    <div class="container">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">Balance</div>
+                <div class="panel-body">
+                    <ul class="list-group bal-ul" id="balance">
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">Add transaction</div>
+                <div class="panel-body">
+                    <form class="form-inline"  method="post" id="AddForm">
+                        <div class="input-group">
+                            <span class="input-group-addon">Operation</span>
+                            <select class="form-control" id="input-type">
+                                <option value="+" selected>+</option>
+                                <option value="-">-</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">Currency</span>
+                            <select class="form-control" id="input-currency">
+                                <option value="USD" selected>USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="BTC">BTC</option>
+                            </select>
+                            </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">Date</span>
+                            <input type="date" class="form-control" id="input-date">
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">Description</span>
+                            <input type="text" class="form-control" id="input-description">
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">Sum</span>
+                            <input type="Number" class="form-control" id="input-sum"  min="0.01" >
+                        </div>
+                        <button type="submit" class="btn btn-primary add__btn">Add transaction</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+
+                <div class="panel-heading">Account Statement</div>
+                <div class="panel-body">
+
+                    <form  class="form-inline"  method="post" >
+                        <div class="input-group">
+                            <span class="input-group-addon">From</span>
+                            <input type="date" class="form-control" id="dateFrom" name="dateFrom">
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">To</span>
+                            <input type="date" class="form-control" id="dateTo" name="dateTo">
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon">Currency</span>
+                            <select class="form-control" id="select-currency">
+                                <option value="USD" selected>USD</option>
+                                <option value="EUR">EUR</option>
+                                <option value="BTC">BTC</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary ok__btn" type="submit" title="Show account statement">Show account statement</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table data-table">
+
+            </table>
+        </div>
+    </div>
+    <script src="/assets/js/auth.js"></script>
+    {% endif %}
+</body>
+</html>
